@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 21:06:00 by tschecro          #+#    #+#             */
-/*   Updated: 2023/10/18 21:08:22 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/10/18 21:14:29 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,12 @@
 # endif
 
 # include <stdbool.h> 
+# include <pthread.h> 
 # include <sys/wait.h> 
 # include <fcntl.h> 
 # include <unistd.h> 
 # include <stdio.h> 
 # include <stdlib.h> 
 # include <stddef.h>
+
 #endif

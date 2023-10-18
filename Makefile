@@ -6,7 +6,7 @@
 #    By: tschecro <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/19 05:15:52 by tschecro          #+#    #+#              #
-#    Updated: 2023/10/18 21:05:15 by tschecro         ###   ########.fr        #
+#    Updated: 2023/10/18 23:15:54 by tschecro         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ OBJ_DIR = .build
 
 OBJ		= 	$(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC) )
 
-NAME	=	pipex
+NAME	=	philo
 
 CC		=	cc
 
@@ -41,7 +41,7 @@ $(NAME)	:	$(OBJ)
 $(OBJ_DIR)/%.o 		:	$(SRC_DIR)/%.c $(INCLUDES)
 						@printf "\033[0;33m Generating fdf object... %-38.38s \r" $@
 						@mkdir -p $(OBJ_DIR)
-						@$(CC) -Wall -Wextra -Werror -g3 -O3 -Ofast -c -I $(INCLUDES_DIR) $< -o $@
+						@$(CC) -Wall -Wextra -Werror -g3 -O3 -Ofast -pthread -c -I $(INCLUDES_DIR) $< -o $@
 
 clean	:
 			rm -rf $(OBJ_DIR)
