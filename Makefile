@@ -6,11 +6,11 @@
 #    By: tschecro <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/19 05:15:52 by tschecro          #+#    #+#              #
-#    Updated: 2023/10/18 23:15:54 by tschecro         ###   ########.fr        #
+#    Updated: 2023/10/23 17:40:30 by tschecro         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRC_FILES		= main.c
+SRC_FILES		= main.c error_management.c philo_utils.c
   
 SRC_DIR 		= srcs
 

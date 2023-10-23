@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 21:06:00 by tschecro          #+#    #+#             */
-/*   Updated: 2023/10/18 21:14:29 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/10/23 16:29:10 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <stdbool.h> 
 # include <pthread.h> 
 # include <sys/wait.h> 
+# include <sys/time.h>
 # include <fcntl.h> 
 # include <unistd.h> 
 # include <stdio.h> 
