@@ -54,5 +54,11 @@ int	main(int ac, char **av)
 	philo = malloc(sizeof(pthread_t) * data.nb_of_philo);
 	if (!philo)
 		return (ft_putendl_fd("philo : call_system failure !", 2), 1);
+	while (1)
+	{
+		usleep(100000);
+		print_args(&data, ac);
+		printf("boucle ou les philos vont graille\n");
+	}
 	return (0);
 }

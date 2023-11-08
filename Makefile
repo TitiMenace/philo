@@ -41,7 +41,7 @@ $(NAME)	:	$(OBJ)
 $(OBJ_DIR)/%.o 		:	$(SRC_DIR)/%.c $(INCLUDES)
 						@printf "\033[0;33m Generating fdf object... %-38.38s \r" $@
 						@mkdir -p $(OBJ_DIR)
-						@$(CC) -Wall -Wextra -Werror -g3 -O3 -Ofast -pthread -c -I $(INCLUDES_DIR) $< -o $@
+						@$(CC) -g3 -O3 -Ofast -pthread -c -I $(INCLUDES_DIR) $< -o $@
 
 clean	:
 			rm -rf $(OBJ_DIR)
