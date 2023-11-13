@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-SRC_FILES		= main.c error_management.c philo_utils.c
+SRC_FILES		= main.c error_management.c philo_utils.c monitor.c
   
 SRC_DIR 		= srcs
 
