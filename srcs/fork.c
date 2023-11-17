@@ -1,3 +1,8 @@
+
+#include "philo.h"
+#include "struct.h"
+#include "includes.h"
+
 int	init_forks_tab(t_data *data)
 {
 	int	i;
@@ -13,4 +18,23 @@ int	init_forks_tab(t_data *data)
 		i++;
 	}
 	return (1);
+}
+
+void	set_table(t_data *data, t_philo *philos)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->n_philo)
+	{
+		philos[i].l_fork = &data->forks[i];
+		i++;
+	}
+	i = 0;
+	while (i < data->n_philo + 1)
+	{
+		philos[i].r_fork = philos[i].l_fork;
+		i++;
+	}
+	philos[i].r_fork = philo[0].l_fork;
 }

@@ -45,14 +45,14 @@ void	print_args(t_data *data, int ac)
 		dprintf(2, "%d\n", data->eat_counter);
 }
 
-int	philo_create(t_philo philo, int i)
+int	philo_create(t_philo *philo, int i)
 {
-	philo.thread = malloc(sizeof(pthread_t));
-	if (!philo.thread)
+	philo->thread = malloc(sizeof(pthread_t));
+	if (!philo->thread)
 		return (0);
-	philo.eat_counter = 0;
-	philo.id = i + 1;
-	if (pthread_create(philo.thread, NULL, &routine, philo))
+	philo->eat_counter = 0;
+	philo->id = i + 1;
+	if (pthread_create(philo->thread, NULL, &routine, (void *)philo))
 		return (0);
 	return (1);
 }
@@ -70,14 +70,14 @@ t_philo	*init_philo(t_philo *philos, t_data *data)
 	while (i < data->n_philo)
 	{
 		usleep(200);
-		if (!philo_create(philos[i], i))
+		if (!philo_create(&philos[i], i))
 			return (NULL);
 		i += 2;
 	}
 	i = 1;
 	while (i < data->n_philo)
 	{
-		if (!philo_create(philos[i], i))
+		if (!philo_create(&philos[i], i))
 			return (NULL);
 		i += 2;
 	}

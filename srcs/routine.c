@@ -1,4 +1,4 @@
-int	routine(void *arg)
+void	*routine(void *arg)
 {
 	t_philo	*philo;
 

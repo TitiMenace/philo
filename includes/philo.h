@@ -28,7 +28,7 @@ bool	check_negative(t_data *data, int ac);
 /* -------------------------------------------------------------------------- */
 /*                           FILE = srcs/routine.c                            */
 /* -------------------------------------------------------------------------- */
-int	routine(void *arg);
+void	*routine(void *arg);
 
 /* -------------------------------------------------------------------------- */
 /*                         FILE = srcs/philo_utils.c                          */
@@ -40,7 +40,7 @@ int	ft_atoi(const char *str);
 /* -------------------------------------------------------------------------- */
 bool	init_data(t_data *data, int ac, char **av);
 void	print_args(t_data *data, int ac);
-int	philo_create(t_philo philo, int i);
+int	philo_create(t_philo *philo, int i);
 t_philo	*init_philo(t_philo *philos, t_data *data);
 int	main(int ac, char **av);
 

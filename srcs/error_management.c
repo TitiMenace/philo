@@ -69,7 +69,7 @@ bool	check_digit(char **av)
 
 bool	check_negative(t_data *data, int ac)
 {
-	if (data->nb_of_philo < 0)
+	if (data->n_philo < 0)
 		return (false);
 	if (data->time_to_die < 0)
 		return (false);
