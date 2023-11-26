@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STRUCT_H
+#ifndGef STRUCT_H
 # define STRUCT_H
 
 # include "includes.h"
@@ -34,7 +34,16 @@ typedef struct s_data
 	int	time_to_sleep;
 	int	eat_counter;
 	int begin_time;
+	int	time_to_wait;
+	int	n_philo_has_eaten;
+	int died;
+
 	pthread_mutex_t	*forks;
+	pthread_mutex_t	has_eaten_mutex;
+	pthread_mutex_t	n_eaten_mutex;
+	pthread_mutex_t	time_remain_mutex;
+	pthread_mutex_t	died_mutex;
+	pthread_mutex_t	output;
 
 }			t_data;
 
@@ -45,6 +54,8 @@ typedef struct s_philo
 	pthread_mutex_t		*r_fork;
 	int					id;
 	int					eat_counter;
+	int					time_remain;
+	int					sais_pas;
 }			t_philo;
 
 

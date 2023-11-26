@@ -36,5 +36,5 @@ void	set_table(t_data *data, t_philo *philos)
 		philos[i].r_fork = philos[i].l_fork;
 		i++;
 	}
-	philos[i].r_fork = philo[0].l_fork;
+	philos[i].r_fork = philos[0].l_fork;
 }

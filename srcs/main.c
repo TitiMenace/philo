@@ -14,6 +14,14 @@
 #include "struct.h"
 #include "includes.h"
 
+int	get_time_to_sleep(t_data *data)
+{
+	if (data->time_to_sleep < data->time_to_eat && data->n_philo % 2)
+		return ((data->time_to_eat - data->time_to_sleep) * 1000 + 1);
+	else
+		return (1);
+}
+
 bool	init_data(t_data *data, int ac, char **av)
 {
 	if (ac < 5)
@@ -31,6 +39,7 @@ bool	init_data(t_data *data, int ac, char **av)
 	if (!check_negative(data, ac))
 		return (ft_putendl_fd("philo : Positive value is required !", 2), false);
 	data->begin_time = get_time();
+	data->time_to_wait = get_time_to_sleep(data);
 	return (true);
 }
 
@@ -84,6 +93,15 @@ t_philo	*init_philo(t_philo *philos, t_data *data)
 	return (philos);
 
 }
+
+
+t_data	*_data(void)
+{
+	static	t_data d;
+	
+	return(&d); 
+}
+
 
 int	main(int ac, char **av)
 {

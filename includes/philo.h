@@ -13,8 +13,10 @@
 #ifndef PHILO_H
 # define PHILO_H
 
-# include "includes.h"
 # include "struct.h"
+# include "includes.h"
+
+
 
 /* -------------------------------------------------------------------------- */
 /*                       FILE = srcs/error_management.c                       */
@@ -28,6 +30,8 @@ bool	check_negative(t_data *data, int ac);
 /* -------------------------------------------------------------------------- */
 /*                           FILE = srcs/routine.c                            */
 /* -------------------------------------------------------------------------- */
+int	is_dead(void);
+int	thinking(t_philo *philo);
 void	*routine(void *arg);
 
 /* -------------------------------------------------------------------------- */
@@ -42,18 +46,22 @@ bool	init_data(t_data *data, int ac, char **av);
 void	print_args(t_data *data, int ac);
 int	philo_create(t_philo *philo, int i);
 t_philo	*init_philo(t_philo *philos, t_data *data);
+int	get_time_to_sleep(t_data *data);
+t_data	*_data(void);
 int	main(int ac, char **av);
 
 /* -------------------------------------------------------------------------- */
 /*                             FILE = srcs/fork.c                             */
 /* -------------------------------------------------------------------------- */
 int	init_forks_tab(t_data *data);
+void	set_table(t_data *data, t_philo *philos);
 
 /* -------------------------------------------------------------------------- */
 /*                           FILE = srcs/monitor.c                            */
 /* -------------------------------------------------------------------------- */
 int	get_time(void);
 void	monitor(t_data *data, t_philo *philo, char *status);
+int	waiting(int time);
 
 
 #endif

@@ -19,3 +19,17 @@ void	monitor(t_data *data, t_philo *philo, char *status)
 	printf("%d %d %s\n", time_stamp, philo->id, status);
 
 }
+
+int	waiting(int time)
+{
+	int begin;
+
+	begin = get_time() * 1000;
+	while (get_time() * 1000 - begin < time)
+	{
+		if (is_dead())
+			return (0);
+		usleep(50);
+	}
+	return (1);
+}
