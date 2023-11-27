@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndGef STRUCT_H
+#ifndef STRUCT_H
 # define STRUCT_H
 
 # include "includes.h"
@@ -53,9 +53,9 @@ typedef struct s_philo
 	pthread_mutex_t		*l_fork;
 	pthread_mutex_t		*r_fork;
 	int					id;
-	int					eat_counter;
+	int					n_meals;
 	int					time_remain;
-	int					sais_pas;
+	int					has_eaten;
 }			t_philo;
 
 

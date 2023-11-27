@@ -44,12 +44,16 @@ int	eating(t_philo *philo)
 	t_data	*data;
 
 	data = _data();
+	philo->time_remain = (get_time() - data->begin_time) + data->time_to_die;
+	philo->n_meals++;
 	if (is_dead())
 		return (0);
 	monitor(data, philo, "is eating");
 	if (!waiting(data->time_to_eat * 1000))
 		return (0);
 	if (is_dead())
+		return (0);
+	if (!waiting(200));
 		return (0);
 	return (1);
 }
@@ -76,6 +80,23 @@ void	*routine(void *arg)
 
 	data = _data();
 	philo = arg;
-
-	
+	philo->time_remain = data->time_to_die;
+	while (!is_dead())
+	{
+		if (!thinking(philo))
+			break ;
+		while (!get_forks(philo) && !is_dead())
+			usleep(10);
+		if (is_dead())
+		{
+			unlock_forks(philo);
+			break ;
+		}
+		if (!eating(philo))
+			break ;
+		if (!sleeping(philo))
+			break ;
+	}
+	pthread_exit(NULL);
+	return (NULL);
 }

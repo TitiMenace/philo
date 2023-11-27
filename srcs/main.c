@@ -94,14 +94,12 @@ t_philo	*init_philo(t_philo *philos, t_data *data)
 
 }
 
-
 t_data	*_data(void)
 {
 	static	t_data d;
 	
 	return(&d); 
 }
-
 
 int	main(int ac, char **av)
 {

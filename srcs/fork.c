@@ -38,3 +38,28 @@ void	set_table(t_data *data, t_philo *philos)
 	}
 	philos[i].r_fork = philos[0].l_fork;
 }
+
+int	get_forks(t_philo *philo)
+{
+	if (philo->id % 2 == 0)
+	{
+		if (pthread_mutex_lock(philo->l_fork))
+			return (0);
+		monitor(philo, "has taken a fork");
+		if (pthread_mutex_lock(philo->r_fork))
+			return (0);
+		monitor(philo, "has taken a fork");
+	}
+	else
+	{
+		if (pthread_mutex_lock(philo->r_fork))
+			return (0);
+		monitor(philo, "has taken a fork");
+		if (pthread_mutex_lock(philo->l_fork))
+			return (0);
+		monitor(philo, "has taken a fork");
+	}
+	if (is_dead())
+		return (0);
+	return (1);
+}
