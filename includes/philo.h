@@ -51,7 +51,7 @@ int	init_mutexes(t_data *data);
 t_philo	*init_philo(t_philo *philos, t_data *data);
 int	setup_routine(t_data *data, t_philo *philos);
 t_data	*_data(void);
-bool	join_philo(t_philo * philos);
+int	join_philo(t_philo * philos);
 int	main(int ac, char **av);
 
 /* -------------------------------------------------------------------------- */

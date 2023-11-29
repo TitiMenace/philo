@@ -112,7 +112,7 @@ t_data	*_data(void)
 	return(&d); 
 }
 
-bool	join_philo(t_philo * philos)
+int	join_philo(t_philo * philos)
 {
 	t_data	*data;
 	int	i;
@@ -121,11 +121,10 @@ bool	join_philo(t_philo * philos)
 	i = 0;
 	while (i < data->n_philo)
 	{
-		if(!pthread_join(*philos[i].thread, NULL))
-			return (false);
+		pthread_join(*philos[i].thread, NULL);
 		i++;
 	}
-	return (true);
+	return (1);
 }
 
 int	ft_exit(t_philo *philo)
@@ -176,7 +175,6 @@ int	main(int ac, char **av)
 		return (ft_exit(philos), ft_putendl_fd("philo : call_system failure !", 2), 1);
 	loop(philos);
 	pthread_mutex_unlock(&data->output);
-	if (!join_philo(philos))
-		return (ft_exit(philos), 1);
+	join_philo(philos);
 	return (ft_exit(philos));
 }

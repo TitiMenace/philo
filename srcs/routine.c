@@ -44,8 +44,6 @@ int	eating(t_philo *philo)
 	t_data	*data;
 
 	data = _data();
-	if (!is_dead())
-		return (0);
 	pthread_mutex_lock(&data->time_remain_mutex);
 	philo->time_remain = (get_time() - data->begin_time) + data->time_to_die;
 	pthread_mutex_unlock(&data->time_remain_mutex);

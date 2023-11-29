@@ -18,7 +18,7 @@ void	monitor(t_data *data, t_philo *philo, char *status)
 	pthread_mutex_lock(&data->output);
 	if (is_dead())
 	{
-		pthread_mutex_lock(&data->output);
+		pthread_mutex_unlock(&data->output);
 		return ;
 	}
 	printf("%d %d %s\n", get_time() - data->begin_time, philo->id, status);
