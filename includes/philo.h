@@ -65,8 +65,8 @@ int	unlock_forks(t_philo *philo);
 /* -------------------------------------------------------------------------- */
 /*                           FILE = srcs/checking.c                           */
 /* -------------------------------------------------------------------------- */
-int	check_food(t_philo *philo);
-int	check_death(t_philo *philo);
+int	check_food(t_philo philo);
+int	check_death(t_philo philo);
 int	loop(t_philo *philos);
 
 /* -------------------------------------------------------------------------- */

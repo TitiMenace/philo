@@ -32,9 +32,9 @@ int	set_table(t_data *data, t_philo *philos)
 		i++;
 	}
 	i = 0;
-	while (i < data->n_philo + 1)
+	while (i < data->n_philo - 1)
 	{
-		philos[i].r_fork = philos[i].l_fork;
+		philos[i].r_fork = philos[i + 1].l_fork;
 		i++;
 	}
 	philos[i].r_fork = philos[0].l_fork;

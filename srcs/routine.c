@@ -48,7 +48,8 @@ int	eating(t_philo *philo)
 	philo->time_remain = (get_time() - data->begin_time) + data->time_to_die;
 	pthread_mutex_unlock(&data->time_remain_mutex);
 	philo->n_meals++;
-	pthread_mutex_lock(&data->n_eaten_mutex);
+	monitor(data, philo, "is eating");
+	pthread_mutex_lock(&data->has_eaten_mutex);
 	if (philo->n_meals == data->eat_counter && philo->has_eaten == 0)
 		philo->has_eaten = 1;
 	pthread_mutex_unlock(&data->has_eaten_mutex);

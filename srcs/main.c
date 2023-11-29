@@ -47,17 +47,6 @@ bool	init_data(t_data *data, int ac, char **av)
 	return (true);
 }
 
-void	print_args(t_data *data, int ac)
-{
-	
-	dprintf(2, "%d\n", data->n_philo);
-	dprintf(2, "%d\n", data->time_to_die);
-	dprintf(2, "%d\n", data->time_to_eat);
-	dprintf(2, "%d\n", data->time_to_sleep);
-	if (ac == 6)
-		dprintf(2, "%d\n", data->eat_counter);
-}
-
 int	philo_create(t_philo *philo, int i)
 {
 
@@ -66,6 +55,7 @@ int	philo_create(t_philo *philo, int i)
 		return (0);
 	philo->n_meals = 0;
 	philo->id = i + 1;
+	philo->has_eaten = 0;
 	if (pthread_create(philo->thread, NULL, &routine, (void *)philo))
 		return (0);
 	return (1);
@@ -82,6 +72,8 @@ int	init_mutexes(t_data *data)
 	if (pthread_mutex_init(&data->time_remain_mutex, 0))
 		return (0);
 	if (pthread_mutex_init(&data->n_eaten_mutex, 0))
+		return (0);
+	if (pthread_mutex_init(&data->has_eaten_mutex, 0))
 		return (0);
 	return (1);
 }
@@ -154,6 +146,30 @@ bool	join_philo(t_philo * philos)
 	return (true);
 }
 
+int	ft_exit(t_philo *philo)
+{
+	t_data	*data;
+	int	i;
+
+	data = _data();
+	i = 0;
+	while (i < data->n_philo)
+	{
+		free(philo[i].thread);
+		i++;
+	}
+	pthread_mutex_destroy(&data->has_eaten_mutex);
+	pthread_mutex_destroy(&data->time_remain_mutex);
+	pthread_mutex_destroy(&data->died_mutex);
+	pthread_mutex_destroy(&data->output);
+	pthread_mutex_destroy(&data->has_eaten_mutex);
+	pthread_mutex_destroy(data->forks);
+	free(data->forks);
+	free(philo);
+	return (0);
+}
+
+
 
 int	main(int ac, char **av)
 {
@@ -165,11 +181,14 @@ int	main(int ac, char **av)
 		return (0);
 	if (!init_mutexes)
 		return (0);
-	if (!init_philo(philos, data))
-		return (ft_putendl_fd("philo : call_system failure !", 2), 1);
+	if (!init_forks_tab(data))
+		return (0);
+	philos = init_philo(philos, data);
+	if (!philos)
+		return (free(data->forks), ft_putendl_fd("philo : call_system failure !", 2), 1);
 	loop(philos);
 	pthread_mutex_unlock(&data->output);
 	if (!join_philo(philos))
-		return (0);
-	return (0);
+		return (ft_exit(philos), 1);
+	return (ft_exit(philos));
 }
