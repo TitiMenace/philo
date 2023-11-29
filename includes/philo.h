@@ -16,6 +16,7 @@
 # include "includes.h"
 # include "struct.h"
 
+
 /* -------------------------------------------------------------------------- */
 /*                       FILE = srcs/error_management.c                       */
 /* -------------------------------------------------------------------------- */
@@ -46,16 +47,27 @@ int	get_time_to_sleep(t_data *data);
 bool	init_data(t_data *data, int ac, char **av);
 void	print_args(t_data *data, int ac);
 int	philo_create(t_philo *philo, int i);
+int	init_mutexes(t_data *data);
 t_philo	*init_philo(t_philo *philos, t_data *data);
+int	setup_routine(t_data *data, t_philo *philos);
 t_data	*_data(void);
+bool	join_philo(t_philo * philos);
 int	main(int ac, char **av);
 
 /* -------------------------------------------------------------------------- */
 /*                             FILE = srcs/fork.c                             */
 /* -------------------------------------------------------------------------- */
 int	init_forks_tab(t_data *data);
-void	set_table(t_data *data, t_philo *philos);
+int	set_table(t_data *data, t_philo *philos);
 int	get_forks(t_philo *philo);
+int	unlock_forks(t_philo *philo);
+
+/* -------------------------------------------------------------------------- */
+/*                           FILE = srcs/checking.c                           */
+/* -------------------------------------------------------------------------- */
+int	check_food(t_philo *philo);
+int	check_death(t_philo *philo);
+int	loop(t_philo *philos);
 
 /* -------------------------------------------------------------------------- */
 /*                           FILE = srcs/monitor.c                            */

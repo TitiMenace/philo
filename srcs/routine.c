@@ -44,16 +44,20 @@ int	eating(t_philo *philo)
 	t_data	*data;
 
 	data = _data();
+	pthread_mutex_lock(&data->time_remain_mutex);
 	philo->time_remain = (get_time() - data->begin_time) + data->time_to_die;
+	pthread_mutex_unlock(&data->time_remain_mutex);
 	philo->n_meals++;
-	if (is_dead())
-		return (0);
-	monitor(data, philo, "is eating");
+	pthread_mutex_lock(&data->n_eaten_mutex);
+	if (philo->n_meals == data->eat_counter && philo->has_eaten == 0)
+		philo->has_eaten = 1;
+	pthread_mutex_unlock(&data->has_eaten_mutex);
 	if (!waiting(data->time_to_eat * 1000))
-		return (0);
+		return (unlock_forks(philo), 0);
+	unlock_forks(philo);
 	if (is_dead())
 		return (0);
-	if (!waiting(200));
+	if (!waiting(200))
 		return (0);
 	return (1);
 }
@@ -68,8 +72,7 @@ int	sleeping(t_philo *philo)
 	monitor(data, philo, "is sleeping");
 	if (!waiting(data->time_to_sleep * 1000))
 		return (0);
-	if (is_dead())
-		return (0);
+	return (1);
 }
 
 
@@ -83,6 +86,7 @@ void	*routine(void *arg)
 	philo->time_remain = data->time_to_die;
 	while (!is_dead())
 	{
+		
 		if (!thinking(philo))
 			break ;
 		while (!get_forks(philo) && !is_dead())

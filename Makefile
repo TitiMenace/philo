@@ -10,7 +10,8 @@
 #                                                                              #
 # **************************************************************************** #
 
-SRC_FILES		= main.c error_management.c philo_utils.c monitor.c
+SRC_FILES		= main.c error_management.c philo_utils.c monitor.c fork.c \
+				  routine.c checking.c
   
 SRC_DIR 		= srcs
 

@@ -40,6 +40,10 @@ bool	init_data(t_data *data, int ac, char **av)
 		return (ft_putendl_fd("philo : Positive value is required !", 2), false);
 	data->begin_time = get_time();
 	data->time_to_wait = get_time_to_sleep(data);
+	data->died = 0;	
+	data->n_philo_has_eaten = 0;
+
+
 	return (true);
 }
 
@@ -56,15 +60,32 @@ void	print_args(t_data *data, int ac)
 
 int	philo_create(t_philo *philo, int i)
 {
+
 	philo->thread = malloc(sizeof(pthread_t));
 	if (!philo->thread)
 		return (0);
-	philo->eat_counter = 0;
+	philo->n_meals = 0;
 	philo->id = i + 1;
 	if (pthread_create(philo->thread, NULL, &routine, (void *)philo))
 		return (0);
 	return (1);
 }
+
+int	init_mutexes(t_data *data)
+{
+	if (pthread_mutex_init(&data->output, 0))
+		return (0);
+	if (pthread_mutex_init(&data->died_mutex, 0))
+		return (0);
+	if (pthread_mutex_init(&data->n_eaten_mutex, 0))
+		return (0);
+	if (pthread_mutex_init(&data->time_remain_mutex, 0))
+		return (0);
+	if (pthread_mutex_init(&data->n_eaten_mutex, 0))
+		return (0);
+	return (1);
+}
+
 
 
 t_philo	*init_philo(t_philo *philos, t_data *data)
@@ -72,7 +93,7 @@ t_philo	*init_philo(t_philo *philos, t_data *data)
 	int	i;
 
 	philos = malloc(sizeof(t_philo) * data->n_philo);
-	if (!philos)
+	if (!philos || !set_table(data, philos))
 		return (NULL);
 	i = 0;
 	data->begin_time = get_time();
@@ -80,19 +101,35 @@ t_philo	*init_philo(t_philo *philos, t_data *data)
 	{
 		usleep(200);
 		if (!philo_create(&philos[i], i))
+		{
+			
 			return (NULL);
+		}
 		i += 2;
 	}
 	i = 1;
 	while (i < data->n_philo)
 	{
 		if (!philo_create(&philos[i], i))
+		{
+			
 			return (NULL);
+		}
 		i += 2;
 	}
 	return (philos);
 
 }
+
+int	setup_routine(t_data *data, t_philo *philos)
+{
+	if (!init_forks_tab(data))
+		return (0);
+	if (!init_philo(philos, data))
+		return (0);
+	return (1);
+}
+
 
 t_data	*_data(void)
 {
@@ -101,15 +138,38 @@ t_data	*_data(void)
 	return(&d); 
 }
 
+bool	join_philo(t_philo * philos)
+{
+	t_data	*data;
+	int	i;
+
+	data = _data();
+	i = 0;
+	while (i < data->n_philo)
+	{
+		if(!pthread_join(*philos[i].thread, NULL))
+			return (false);
+		i++;
+	}
+	return (true);
+}
+
+
 int	main(int ac, char **av)
 {
-	t_data		data;
+	t_data		*data;
 	t_philo		*philos;
 
-	if (!init_data(&data, ac, av))
-		return (1);
-	philos = malloc(sizeof(t_philo) * data.n_philo);
-	if (!philos)
+	data = _data();
+	if (!init_data(data, ac, av))
+		return (0);
+	if (!init_mutexes)
+		return (0);
+	if (!init_philo(philos, data))
 		return (ft_putendl_fd("philo : call_system failure !", 2), 1);
+	loop(philos);
+	pthread_mutex_unlock(&data->output);
+	if (!join_philo(philos))
+		return (0);
 	return (0);
 }

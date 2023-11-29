@@ -1,0 +1,146 @@
+error_management.c:72:	if (data->n_philo < 0)
+error_management.c:74:	if (data->time_to_die < 0)
+error_management.c:76:	if (data->time_to_eat < 0)
+error_management.c:78:	if (data->time_to_sleep < 0)
+error_management.c:82:		if (data->eat_counter < 0)
+routine.c:11:	pthread_mutex_lock(&data->has_eaten_mutex);
+routine.c:12:	if (data->n_philo_has_eaten == data->n_philo)
+routine.c:14:		dprintf(2, "%d = %d\n", data->n_philo_has_eaten, data->n_philo);
+routine.c:15:		pthread_mutex_unlock(&data->has_eaten_mutex);
+routine.c:18:	pthread_mutex_unlock(&data->has_eaten_mutex);
+routine.c:19:	pthread_mutex_lock(&data->died_mutex);
+routine.c:20:	if (data->died)
+routine.c:22:		pthread_mutex_unlock(&data->died_mutex);
+routine.c:25:	pthread_mutex_unlock(&data->died_mutex);
+routine.c:37:	waiting(data->time_to_wait);
+routine.c:48:	pthread_mutex_lock(&data->time_remain_mutex);
+routine.c:49:	philo->time_remain = (get_time() - data->begin_time) + data->time_to_die;
+routine.c:50:	pthread_mutex_unlock(&data->time_remain_mutex);
+routine.c:52:	pthread_mutex_lock(&data->n_eaten_mutex);
+routine.c:53:	if (philo->n_meals == data->eat_counter && philo->has_eaten == 0)
+routine.c:55:	pthread_mutex_unlock(&data->has_eaten_mutex);
+routine.c:56:	if (!waiting(data->time_to_eat * 1000))
+routine.c:74:	if (!waiting(data->time_to_sleep * 1000))
+routine.c:87:	philo->time_remain = data->time_to_die;
+main.c:19:	if (data->time_to_sleep < data->time_to_eat && data->n_philo % 2)
+main.c:20:		return ((data->time_to_eat - data->time_to_sleep) * 1000 + 1);
+main.c:33:	data->n_philo = ft_atoi(av[1]);
+main.c:34:	data->time_to_die = ft_atoi(av[2]);
+main.c:35:	data->time_to_eat = ft_atoi(av[3]);
+main.c:36:	data->time_to_sleep = ft_atoi(av[4]);
+main.c:38:		data->eat_counter = ft_atoi(av[5]);
+main.c:41:	data->begin_time = get_time();
+main.c:42:	data->time_to_wait = get_time_to_sleep(data);
+main.c:43:	data->died = 0;	
+main.c:44:	data->n_philo_has_eaten = 0;
+main.c:53:	dprintf(2, "%d\n", data->n_philo);
+main.c:54:	dprintf(2, "%d\n", data->time_to_die);
+main.c:55:	dprintf(2, "%d\n", data->time_to_eat);
+main.c:56:	dprintf(2, "%d\n", data->time_to_sleep);
+main.c:58:		dprintf(2, "%d\n", data->eat_counter);
+main.c:76:	if (pthread_mutex_init(&data->output, 0))
+main.c:78:	if (pthread_mutex_init(&data->died_mutex, 0))
+main.c:80:	if (pthread_mutex_init(&data->n_eaten_mutex, 0))
+main.c:82:	if (pthread_mutex_init(&data->time_remain_mutex, 0))
+main.c:84:	if (pthread_mutex_init(&data->n_eaten_mutex, 0))
+main.c:95:	philos = malloc(sizeof(t_philo) * data->n_philo);
+main.c:99:	data->begin_time = get_time();
+main.c:100:	while (i < data->n_philo)
+main.c:111:	while (i < data->n_philo)
+main.c:148:	while (i < data->n_philo)
+fork.c:12:	data->forks = malloc(sizeof(pthread_mutex_t) * data->n_philo);
+fork.c:13:	if (!data->forks)
+fork.c:15:	while (i < data->n_philo)
+fork.c:17:		if (pthread_mutex_init(&data->forks[i], 0))
+fork.c:29:	while (i < data->n_philo)
+fork.c:31:		philos[i].l_fork = &data->forks[i];
+fork.c:35:	while (i < data->n_philo + 1)
+checking.c:10:	pthread_mutex_lock(&data->has_eaten_mutex);
+checking.c:13:		data->n_philo_has_eaten++;
+checking.c:14:		if (data->n_philo_has_eaten == data->n_philo)
+checking.c:16:			pthread_mutex_unlock(&data->has_eaten_mutex);
+checking.c:21:	pthread_mutex_unlock(&data->has_eaten_mutex);
+checking.c:30:	pthread_mutex_lock(&data->time_remain_mutex);
+checking.c:31:	if ((get_time() - data->begin_time) > philo->time_remain)
+checking.c:33:		pthread_mutex_unlock(&data->time_remain_mutex);
+checking.c:35:		pthread_mutex_lock(&data->died_mutex);
+checking.c:36:		data->died = 1;
+checking.c:37:		pthread_mutex_unlock(&data->died_mutex);
+checking.c:40:	pthread_mutex_unlock(&data->time_remain_mutex);
+checking.c:54:		while (i < data->n_philo)
+checking.c:57:				return (pthread_mutex_lock(&data->output), 0);
+checking.c:59:				return (pthread_mutex_lock(&data->output), 0);
+n_philos:1:error_management.c:72:	if (data->n_philo < 0)
+n_philos:2:error_management.c:74:	if (data->time_to_die < 0)
+n_philos:3:error_management.c:76:	if (data->time_to_eat < 0)
+n_philos:4:error_management.c:78:	if (data->time_to_sleep < 0)
+n_philos:5:error_management.c:82:		if (data->eat_counter < 0)
+n_philos:6:routine.c:11:	pthread_mutex_lock(&data->has_eaten_mutex);
+n_philos:7:routine.c:12:	if (data->n_philo_has_eaten == data->n_philo)
+n_philos:8:routine.c:14:		dprintf(2, "%d = %d\n", data->n_philo_has_eaten, data->n_philo);
+n_philos:9:routine.c:15:		pthread_mutex_unlock(&data->has_eaten_mutex);
+n_philos:10:routine.c:18:	pthread_mutex_unlock(&data->has_eaten_mutex);
+n_philos:11:routine.c:19:	pthread_mutex_lock(&data->died_mutex);
+n_philos:12:routine.c:20:	if (data->died)
+n_philos:13:routine.c:22:		pthread_mutex_unlock(&data->died_mutex);
+n_philos:14:routine.c:25:	pthread_mutex_unlock(&data->died_mutex);
+n_philos:15:routine.c:37:	waiting(data->time_to_wait);
+n_philos:16:routine.c:48:	pthread_mutex_lock(&data->time_remain_mutex);
+n_philos:17:routine.c:49:	philo->time_remain = (get_time() - data->begin_time) + data->time_to_die;
+n_philos:18:routine.c:50:	pthread_mutex_unlock(&data->time_remain_mutex);
+n_philos:19:routine.c:52:	pthread_mutex_lock(&data->n_eaten_mutex);
+n_philos:20:routine.c:53:	if (philo->n_meals == data->eat_counter && philo->has_eaten == 0)
+n_philos:21:routine.c:55:	pthread_mutex_unlock(&data->has_eaten_mutex);
+n_philos:22:routine.c:56:	if (!waiting(data->time_to_eat * 1000))
+n_philos:23:routine.c:74:	if (!waiting(data->time_to_sleep * 1000))
+n_philos:24:routine.c:87:	philo->time_remain = data->time_to_die;
+n_philos:25:main.c:19:	if (data->time_to_sleep < data->time_to_eat && data->n_philo % 2)
+n_philos:26:main.c:20:		return ((data->time_to_eat - data->time_to_sleep) * 1000 + 1);
+n_philos:27:main.c:33:	data->n_philo = ft_atoi(av[1]);
+n_philos:28:main.c:34:	data->time_to_die = ft_atoi(av[2]);
+n_philos:29:main.c:35:	data->time_to_eat = ft_atoi(av[3]);
+n_philos:30:main.c:36:	data->time_to_sleep = ft_atoi(av[4]);
+n_philos:31:main.c:38:		data->eat_counter = ft_atoi(av[5]);
+n_philos:32:main.c:41:	data->begin_time = get_time();
+n_philos:33:main.c:42:	data->time_to_wait = get_time_to_sleep(data);
+n_philos:34:main.c:43:	data->died = 0;	
+n_philos:35:main.c:44:	data->n_philo_has_eaten = 0;
+n_philos:36:main.c:53:	dprintf(2, "%d\n", data->n_philo);
+n_philos:37:main.c:54:	dprintf(2, "%d\n", data->time_to_die);
+n_philos:38:main.c:55:	dprintf(2, "%d\n", data->time_to_eat);
+n_philos:39:main.c:56:	dprintf(2, "%d\n", data->time_to_sleep);
+n_philos:40:main.c:58:		dprintf(2, "%d\n", data->eat_counter);
+n_philos:41:main.c:76:	if (pthread_mutex_init(&data->output, 0))
+n_philos:42:main.c:78:	if (pthread_mutex_init(&data->died_mutex, 0))
+n_philos:43:main.c:80:	if (pthread_mutex_init(&data->n_eaten_mutex, 0))
+n_philos:44:main.c:82:	if (pthread_mutex_init(&data->time_remain_mutex, 0))
+n_philos:45:main.c:84:	if (pthread_mutex_init(&data->n_eaten_mutex, 0))
+n_philos:46:main.c:95:	philos = malloc(sizeof(t_philo) * data->n_philo);
+n_philos:47:main.c:99:	data->begin_time = get_time();
+n_philos:48:main.c:100:	while (i < data->n_philo)
+n_philos:49:main.c:111:	while (i < data->n_philo)
+n_philos:50:main.c:148:	while (i < data->n_philo)
+n_philos:51:fork.c:12:	data->forks = malloc(sizeof(pthread_mutex_t) * data->n_philo);
+n_philos:52:fork.c:13:	if (!data->forks)
+n_philos:53:fork.c:15:	while (i < data->n_philo)
+n_philos:54:fork.c:17:		if (pthread_mutex_init(&data->forks[i], 0))
+n_philos:55:fork.c:29:	while (i < data->n_philo)
+n_philos:56:fork.c:31:		philos[i].l_fork = &data->forks[i];
+n_philos:57:fork.c:35:	while (i < data->n_philo + 1)
+n_philos:58:checking.c:10:	pthread_mutex_lock(&data->has_eaten_mutex);
+n_philos:59:checking.c:13:		data->n_philo_has_eaten++;
+n_philos:60:checking.c:14:		if (data->n_philo_has_eaten == data->n_philo)
+n_philos:61:checking.c:16:			pthread_mutex_unlock(&data->has_eaten_mutex);
+n_philos:62:checking.c:21:	pthread_mutex_unlock(&data->has_eaten_mutex);
+n_philos:63:checking.c:30:	pthread_mutex_lock(&data->time_remain_mutex);
+n_philos:64:checking.c:31:	if ((get_time() - data->begin_time) > philo->time_remain)
+n_philos:65:checking.c:33:		pthread_mutex_unlock(&data->time_remain_mutex);
+n_philos:66:checking.c:35:		pthread_mutex_lock(&data->died_mutex);
+n_philos:67:checking.c:36:		data->died = 1;
+n_philos:68:checking.c:37:		pthread_mutex_unlock(&data->died_mutex);
+n_philos:69:checking.c:40:	pthread_mutex_unlock(&data->time_remain_mutex);
+n_philos:70:checking.c:54:		while (i < data->n_philo)
+n_philos:71:checking.c:57:				return (pthread_mutex_lock(&data->output), 0);
+n_philos:72:checking.c:59:				return (pthread_mutex_lock(&data->output), 0);
+n_philos:73:monitor.c:18:	time_stamp = get_time() - data->begin_time;
+monitor.c:18:	time_stamp = get_time() - data->begin_time;

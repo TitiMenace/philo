@@ -3,6 +3,7 @@
 #include "struct.h"
 #include "includes.h"
 
+
 int	init_forks_tab(t_data *data)
 {
 	int	i;
@@ -20,7 +21,7 @@ int	init_forks_tab(t_data *data)
 	return (1);
 }
 
-void	set_table(t_data *data, t_philo *philos)
+int	set_table(t_data *data, t_philo *philos)
 {
 	int	i;
 
@@ -37,29 +38,48 @@ void	set_table(t_data *data, t_philo *philos)
 		i++;
 	}
 	philos[i].r_fork = philos[0].l_fork;
+	return (1);
 }
 
 int	get_forks(t_philo *philo)
 {
+	t_data *data;
+
+	data = _data();
 	if (philo->id % 2 == 0)
 	{
 		if (pthread_mutex_lock(philo->l_fork))
 			return (0);
-		monitor(philo, "has taken a fork");
+		monitor(data, philo, "has taken a fork");
 		if (pthread_mutex_lock(philo->r_fork))
 			return (0);
-		monitor(philo, "has taken a fork");
+		monitor(data, philo, "has taken a fork");
 	}
 	else
 	{
 		if (pthread_mutex_lock(philo->r_fork))
 			return (0);
-		monitor(philo, "has taken a fork");
+		monitor(data, philo, "has taken a fork");
 		if (pthread_mutex_lock(philo->l_fork))
 			return (0);
-		monitor(philo, "has taken a fork");
+		monitor(data, philo, "has taken a fork");
 	}
 	if (is_dead())
 		return (0);
 	return (1);
+}
+
+int	unlock_forks(t_philo *philo)
+{
+	if (philo->id % 2 == 0)
+	{
+		pthread_mutex_unlock(philo->r_fork);
+		pthread_mutex_unlock(philo->l_fork);
+	}
+	else
+	{
+		pthread_mutex_unlock(philo->l_fork);
+		pthread_mutex_unlock(philo->r_fork);
+	}
+	return (0);
 }
