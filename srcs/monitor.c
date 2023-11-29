@@ -13,11 +13,16 @@ int	get_time(void)
 
 void	monitor(t_data *data, t_philo *philo, char *status)
 {
-	int	time_stamp;
-
-	time_stamp = get_time() - data->begin_time;
-	printf("%d %d %s\n", time_stamp, philo->id, status);
-
+	if (is_dead())
+		return ;
+	pthread_mutex_lock(&data->output);
+	if (is_dead())
+	{
+		pthread_mutex_lock(&data->output);
+		return ;
+	}
+	printf("%d %d %s\n", get_time() - data->begin_time, philo->id, status);
+	pthread_mutex_unlock(&data->output);
 }
 
 int	waiting(int time)

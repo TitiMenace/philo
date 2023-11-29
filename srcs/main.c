@@ -49,14 +49,14 @@ bool	init_data(t_data *data, int ac, char **av)
 
 int	philo_create(t_philo *philo, int i)
 {
-
 	philo->thread = malloc(sizeof(pthread_t));
 	if (!philo->thread)
 		return (0);
 	philo->n_meals = 0;
 	philo->id = i + 1;
 	philo->has_eaten = 0;
-	if (pthread_create(philo->thread, NULL, &routine, (void *)philo))
+	philo->time_remain = _data()->time_to_die;
+	if (pthread_create(philo->thread, NULL, &routine, philo))
 		return (0);
 	return (1);
 }
@@ -78,8 +78,6 @@ int	init_mutexes(t_data *data)
 	return (1);
 }
 
-
-
 t_philo	*init_philo(t_philo *philos, t_data *data)
 {
 	int	i;
@@ -91,37 +89,21 @@ t_philo	*init_philo(t_philo *philos, t_data *data)
 	data->begin_time = get_time();
 	while (i < data->n_philo)
 	{
-		usleep(200);
+		usleep(100);
 		if (!philo_create(&philos[i], i))
-		{
-			
 			return (NULL);
-		}
 		i += 2;
 	}
 	i = 1;
 	while (i < data->n_philo)
 	{
 		if (!philo_create(&philos[i], i))
-		{
-			
 			return (NULL);
-		}
 		i += 2;
 	}
 	return (philos);
 
 }
-
-int	setup_routine(t_data *data, t_philo *philos)
-{
-	if (!init_forks_tab(data))
-		return (0);
-	if (!init_philo(philos, data))
-		return (0);
-	return (1);
-}
-
 
 t_data	*_data(void)
 {
@@ -153,19 +135,25 @@ int	ft_exit(t_philo *philo)
 
 	data = _data();
 	i = 0;
-	while (i < data->n_philo)
+	while (i < data->n_philo && philo->thread)
 	{
 		free(philo[i].thread);
-		i++;
+		i += 2;
+	}
+	i = 1;
+	while (i < data->n_philo && philo->thread)
+	{
+		free(philo[i].thread);
+		i += 2;
 	}
 	pthread_mutex_destroy(&data->has_eaten_mutex);
 	pthread_mutex_destroy(&data->time_remain_mutex);
-	pthread_mutex_destroy(&data->died_mutex);
-	pthread_mutex_destroy(&data->output);
-	pthread_mutex_destroy(&data->has_eaten_mutex);
 	pthread_mutex_destroy(data->forks);
+	pthread_mutex_destroy(&data->output);
 	free(data->forks);
 	free(philo);
+	pthread_mutex_destroy(&data->n_eaten_mutex);
+	pthread_mutex_destroy(&data->died_mutex);
 	return (0);
 }
 
@@ -185,7 +173,7 @@ int	main(int ac, char **av)
 		return (0);
 	philos = init_philo(philos, data);
 	if (!philos)
-		return (free(data->forks), ft_putendl_fd("philo : call_system failure !", 2), 1);
+		return (ft_exit(philos), ft_putendl_fd("philo : call_system failure !", 2), 1);
 	loop(philos);
 	pthread_mutex_unlock(&data->output);
 	if (!join_philo(philos))
