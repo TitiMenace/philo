@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   monitor.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/30 22:40:25 by tschecro          #+#    #+#             */
+/*   Updated: 2023/11/30 22:48:57 by tschecro         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "philo.h"
 #include "struct.h"
@@ -27,7 +38,7 @@ void	monitor(t_data *data, t_philo *philo, char *status)
 
 int	waiting(int time)
 {
-	int begin;
+	int	begin;
 
 	begin = get_time() * 1000;
 	while (get_time() * 1000 - begin < time)
@@ -37,4 +48,12 @@ int	waiting(int time)
 		usleep(50);
 	}
 	return (1);
+}
+
+int	get_time_to_sleep(t_data *data)
+{
+	if (data->time_to_sleep < data->time_to_eat && data->n_philo % 2)
+		return ((data->time_to_eat - data->time_to_sleep) * 1000 + 1);
+	else
+		return (1);
 }

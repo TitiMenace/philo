@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 17:02:33 by tschecro          #+#    #+#             */
-/*   Updated: 2023/10/23 17:49:23 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/11/30 22:39:47 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ bool	check_digit(char **av)
 			if (j == 0 && av[i][0] == '-' && av[i][1] >= '0' && av[i][1] <= '9')
 				j++;
 			if (!(av[i][j] >= '0' && av[i][j] <= '9'))
-					return (false);
+				return (false);
 			j++;
 		}
 		i++;
@@ -84,6 +84,3 @@ bool	check_negative(t_data *data, int ac)
 	}
 	return (true);
 }
-
-
-

@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 21:07:36 by tschecro          #+#    #+#             */
-/*   Updated: 2023/10/23 17:28:08 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/11/30 22:52:42 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,19 +25,17 @@
 # include <stdlib.h> 
 # include <stddef.h>
 
-
 typedef struct s_data
 {
-	int	n_philo;
-	int	time_to_die;
-	int time_to_eat;
-	int	time_to_sleep;
-	int	eat_counter;
-	int begin_time;
-	int	time_to_wait;
-	int	n_philo_has_eaten;
-	int died;
-
+	int				n_philo;
+	int				time_to_die;
+	int				time_to_eat;
+	int				time_to_sleep;
+	int				eat_counter;
+	int				begin_time;
+	int				time_to_wait;
+	int				n_philo_has_eaten;
+	int				died;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	has_eaten_mutex;
 	pthread_mutex_t	n_eaten_mutex;
@@ -57,6 +55,5 @@ typedef struct s_philo
 	int					time_remain;
 	int					has_eaten;
 }			t_philo;
-
 
 #endif

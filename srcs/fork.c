@@ -1,8 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fork.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/30 22:38:17 by tschecro          #+#    #+#             */
+/*   Updated: 2023/11/30 22:39:51 by tschecro         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "philo.h"
 #include "struct.h"
 #include "includes.h"
-
 
 int	init_forks_tab(t_data *data)
 {
@@ -43,7 +53,7 @@ int	set_table(t_data *data, t_philo *philos)
 
 int	get_forks(t_philo *philo)
 {
-	t_data *data;
+	t_data	*data;
 
 	data = _data();
 	if (philo->id % 2 == 0)

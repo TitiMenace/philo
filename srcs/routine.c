@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   routine.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/30 22:48:44 by tschecro          #+#    #+#             */
+/*   Updated: 2023/11/30 22:50:03 by tschecro         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "philo.h"
 #include "struct.h"
@@ -5,7 +16,7 @@
 
 int	is_dead(void)
 {
-	t_data *data;
+	t_data	*data;
 
 	data = _data();
 	pthread_mutex_lock(&data->has_eaten_mutex);
@@ -27,7 +38,7 @@ int	is_dead(void)
 
 int	thinking(t_philo *philo)
 {
-	t_data *data;
+	t_data	*data;
 
 	data = _data();
 	if (is_dead())
@@ -65,7 +76,7 @@ int	eating(t_philo *philo)
 
 int	sleeping(t_philo *philo)
 {
-	t_data *data;
+	t_data	*data;
 
 	data = _data();
 	if (is_dead())
@@ -76,18 +87,16 @@ int	sleeping(t_philo *philo)
 	return (1);
 }
 
-
 void	*routine(void *arg)
 {
 	t_philo	*philo;
-	t_data *data;
+	t_data	*data;
 
 	data = _data();
 	philo = arg;
 	philo->time_remain = data->time_to_die;
 	while (!is_dead())
 	{
-		
 		if (!thinking(philo))
 			break ;
 		while (!get_forks(philo) && !is_dead())

@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 17:28:49 by tschecro          #+#    #+#             */
-/*   Updated: 2023/10/23 17:29:04 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/11/30 22:48:53 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 
 int	ft_atoi(const char *str)
 {
-	int	i;
-	long long result;
-	long long sign;
+	long long	result;
+	long long	sign;
+	int			i;
 
 	i = 0;
 	sign = 1;

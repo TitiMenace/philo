@@ -6,12 +6,12 @@
 #    By: tschecro <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/19 05:15:52 by tschecro          #+#    #+#              #
-#    Updated: 2023/10/23 17:51:21 by tschecro         ###   ########.fr        #
+#    Updated: 2023/11/30 23:42:40 by tschecro         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRC_FILES		= main.c error_management.c philo_utils.c monitor.c fork.c \
-				  routine.c checking.c
+				  routine.c checking.c init_philo.c init_data.c
   
 SRC_DIR 		= srcs
 
@@ -36,13 +36,13 @@ CC		=	cc
 all		:	$(NAME)
 
 $(NAME)	:	$(OBJ)
-			$(CC) $(OBJ) -o $(NAME)
+			$(CC) $(OBJ) -o $(NAME) 
 			@echo "\033[1;32m\nDone!\033[0m"
 
 $(OBJ_DIR)/%.o 		:	$(SRC_DIR)/%.c $(INCLUDES)
 						@printf "\033[0;33m Generating fdf object... %-38.38s \r" $@
 						@mkdir -p $(OBJ_DIR)
-						@$(CC) -g3 -O3 -Ofast -pthread -c -I $(INCLUDES_DIR) $< -o $@
+						@$(CC) -Wall -Wextra -Werror -pthread -g -c -I $(INCLUDES_DIR) $< -o $@
 
 clean	:
 			rm -rf $(OBJ_DIR)
