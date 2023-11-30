@@ -37,7 +37,7 @@ bool	init_data(t_data *data, int ac, char **av)
 	if (ac == 6)
 		data->eat_counter = ft_atoi(av[5]);
 	if (!check_negative(data, ac))
-		return (ft_putendl_fd("philo : Positive value is required !", 2), false);
+		return (ft_putendl_fd("philo : Wrong Args !", 2), false);
 	data->begin_time = get_time();
 	data->time_to_wait = get_time_to_sleep(data);
 	data->died = 0;	
@@ -166,6 +166,9 @@ int	main(int ac, char **av)
 	data = _data();
 	if (!init_data(data, ac, av))
 		return (0);
+	if (_data()->n_philo == 1)
+		return (printf("0 1 is thinking\n"), usleep(_data()->time_to_die \
+				* 1000), printf("%d 1 died\n", _data()->time_to_die));
 	if (!init_mutexes)
 		return (0);
 	if (!init_forks_tab(data))
