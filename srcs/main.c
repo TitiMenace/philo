@@ -65,6 +65,16 @@ int	ft_exit(t_philo *philo)
 	return (0);
 }
 
+int last_check(t_data *data, int ac)
+{
+	if (data->n_philo == 0)
+		return (0);
+	if (ac == 6 && data->eat_counter == 0)
+		return (0);
+	return (1);
+}
+
+
 int	main(int ac, char **av)
 {
 	t_data		*data;
@@ -73,14 +83,16 @@ int	main(int ac, char **av)
 	philos = NULL;
 	data = _data();
 	if (!init_data(data, ac, av))
-		return (0);
+		return (1);
+	if (!last_check(data, ac))
+		return (1);
 	if (_data()->n_philo == 1)
 		return (printf("0 1 is thinking\n"), usleep(_data()->time_to_die \
 				* 1000), printf("%d 1 died\n", _data()->time_to_die));
 	if (!init_mutexes(data))
-		return (0);
+		return (1);
 	if (!init_forks_tab(data))
-		return (0);
+		return (1);
 	philos = init_philo(philos, data);
 	if (!philos)
 		return (ft_exit(philos), ft_putendl_fd("philo : call_system failure !",
@@ -88,5 +100,5 @@ int	main(int ac, char **av)
 	loop(philos);
 	pthread_mutex_unlock(&data->output);
 	join_philo(philos);
-	return (ft_exit(philos));
+	return (ft_exit(philos), 0);
 }

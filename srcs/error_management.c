@@ -71,11 +71,11 @@ bool	check_negative(t_data *data, int ac)
 {
 	if (data->n_philo < 0)
 		return (false);
-	if (data->time_to_die < 0)
+	if (data->time_to_die <= 0)
 		return (false);
-	if (data->time_to_eat < 0)
+	if (data->time_to_eat <= 0)
 		return (false);
-	if (data->time_to_sleep < 0)
+	if (data->time_to_sleep <= 0)
 		return (false);
 	if (ac == 6)
 	{
